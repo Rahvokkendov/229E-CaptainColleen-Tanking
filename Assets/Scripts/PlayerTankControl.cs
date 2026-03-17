@@ -7,23 +7,31 @@ public class PlayerTankControl : MonoBehaviour
     public float rotateSpeed = 100f;
 
     private InputAction moveActions;
+    //private InputAction turretActions;
     private Rigidbody rb;
 
     [SerializeField] GameObject turret;
 
     private void Awake()
     {
-       moveActions = InputSystem.actions.FindAction("Move");
-       rb = GetComponent<Rigidbody>();
+        moveActions = InputSystem.actions.FindAction("Move");
+        //turretActions = InputSystem.actions.FindAction("Turret Turn");
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+       TurretTurn();
+
     }
 
     void FixedUpdate()
     {
         Move();
 
-
     }
 
+    
     public void Move()
     {
         Vector2 moveInput = moveActions.ReadValue<Vector2>();
@@ -38,4 +46,26 @@ public class PlayerTankControl : MonoBehaviour
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
         }
     }
+
+    public void TurretTurn()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Plane plane = new Plane(Vector3.up, transform.position);
+
+
+        float distance;
+
+        if (plane.Raycast(ray, out distance))
+        {
+            Vector3 mousePoint = ray.GetPoint(distance);
+            Vector3 direction = mousePoint - transform.position;
+
+            direction.y = 0;
+
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            turret.transform.rotation = targetRotation;
+        }
+    }
+
 }
