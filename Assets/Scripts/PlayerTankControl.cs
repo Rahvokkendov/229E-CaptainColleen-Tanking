@@ -5,13 +5,16 @@ public class PlayerTankControl : MonoBehaviour
     public float moveFoce = 10f;
     public float maxSpeed = 100f;
     public float rotateSpeed = 100f;
+    public float shootForce = 5000f;
+    public float fireRate = 5f;
+    public float reloadTime = 0f;
 
     private InputAction moveActions;
-    //private InputAction turretActions;
     private Rigidbody rb;
 
     [SerializeField] GameObject turret;
-
+    [SerializeField] GameObject muzzle;
+    [SerializeField] GameObject bulletPrefab;
     private void Awake()
     {
         moveActions = InputSystem.actions.FindAction("Move");
@@ -22,6 +25,13 @@ public class PlayerTankControl : MonoBehaviour
     private void Update()
     {
        TurretTurn();
+
+        if (Mouse.current.leftButton.wasPressedThisFrame && Time.time >= reloadTime)
+        {
+            Shoot();
+            reloadTime = Time.time + fireRate;
+        }
+            
 
     }
 
@@ -68,4 +78,16 @@ public class PlayerTankControl : MonoBehaviour
         }
     }
 
+    public void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
+        Rigidbody bulltetRb = bulletPrefab.GetComponent<Rigidbody>();
+        if (bulltetRb != null)
+        {
+            bulltetRb.AddForce(muzzle.transform.forward * shootForce, ForceMode.Impulse);
+        }
+
+        Debug.Log("Shoot!");
+
+    }
 }
