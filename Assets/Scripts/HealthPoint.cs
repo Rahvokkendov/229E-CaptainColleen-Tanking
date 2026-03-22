@@ -3,14 +3,13 @@ using UnityEngine;
 public abstract class HealthPoint : MonoBehaviour
 {
     public int HpPoint { get; protected set; }
-    public int DamagePoint { get; protected set; }
 
     [SerializeField] protected GameObject tank;
 
-    public void Init(int hp, int dmg)
+    public void Init(int hp)
     {
         HpPoint = hp;
-        DamagePoint = dmg;
+
     }
     public void TakeDamage(int damage)
     {

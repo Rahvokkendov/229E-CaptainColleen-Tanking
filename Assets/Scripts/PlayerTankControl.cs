@@ -5,9 +5,11 @@ public class PlayerTankControl : MonoBehaviour
     public float moveFoce = 10f;
     public float maxSpeed = 100f;
     public float rotateSpeed = 100f;
-    public float shootForce = 50f;
+   
     public float fireRate = 5f;
-    public float reloadTime = 0f;
+    private float reloadTime = 0f;
+    public float recoilForce = 0f;
+
 
     private InputAction moveActions;
     private Rigidbody rb;
@@ -46,7 +48,7 @@ public class PlayerTankControl : MonoBehaviour
     {
         Vector2 moveInput = moveActions.ReadValue<Vector2>();
 
-        rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Acceleration);
+        rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
 
         rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Force);
 
@@ -82,13 +84,8 @@ public class PlayerTankControl : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
 
-        Rigidbody bulltetRb = bullet.GetComponent<Rigidbody>();
-
-        if (bulltetRb != null)
-        {
-            bulltetRb.AddForce(muzzle.transform.forward * shootForce, ForceMode.Impulse);
-        }
-
+        rb.AddForce(-turret.transform.forward * recoilForce, ForceMode.Impulse);
+        rb.AddTorque(-turret.transform.forward * recoilForce, ForceMode.Impulse);
         Debug.Log("Shoot!");
         
     }
