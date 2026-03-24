@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
         HealthPoint hp = collision.gameObject.GetComponent<HealthPoint>();
         if (hp != null)
         {
+
             hp.TakeDamage(damagePoint); 
         }
         Destroy(gameObject);

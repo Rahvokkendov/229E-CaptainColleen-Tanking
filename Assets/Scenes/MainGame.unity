@@ -386,7 +386,7 @@ MonoBehaviour:
   playerTank: {fileID: 928453440}
   smoothSpeed: 0.9
   mouseInfluence: 0.2
-  offset: {x: 0, y: 20, z: 2}
+  offset: {x: 0, y: 30, z: 2}
 --- !u!1 &374561844
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,14 +411,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374561844}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.6, y: -0, z: -0.5}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -33.802986, y: -0.07000005, z: 3.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1520374582}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,6 +1534,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416075388}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1431698338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431698339}
+  m_Layer: 0
+  m_Name: EnemyMuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1431698339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431698338}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.013, y: -1.05, z: 0.027}
+  m_LocalScale: {x: 1, y: 1, z: 0.48751923}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2043875088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1452088359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1735,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ebe7c056cf17b44a2ff6c886f9ae46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameState
-  player: {fileID: 928453446}
   enemyPrefab: {fileID: 0}
 --- !u!1 &1520153091
 GameObject:
@@ -1850,7 +1880,7 @@ Transform:
   m_GameObject: {fileID: 1520374581}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.92, z: -0}
+  m_LocalPosition: {x: 0, y: 1.49, z: -0}
   m_LocalScale: {x: 4.9421, y: 3.0505493, z: 4.9421}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1876,8 +1906,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3.846111
-  m_Center: {x: 0, y: 0, z: 2.8877985}
+  m_Radius: 3.541277
+  m_Center: {x: 0, y: 0, z: 2.5829706}
 --- !u!65 &1520374584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1897,8 +1927,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Size: {x: 1.1562362, y: 2, z: 1.1597255}
+  m_Center: {x: -0.009821903, y: 0, z: -0.01942891}
 --- !u!23 &1520374585
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1970,7 +2000,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   tank: {fileID: 928453439}
   detectionCollider: {fileID: 1520374583}
+  bulletPrefab: {fileID: 5404439306159029694, guid: 62e4418d0921bc54ab4af744b0fa14c4, type: 3}
+  muzzle: {fileID: 1431698338}
   turnSpeed: 5
+  fireRate: 5
 --- !u!1 &1826344973
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,7 +2129,6 @@ GameObject:
   - component: {fileID: 2043875088}
   - component: {fileID: 2043875091}
   - component: {fileID: 2043875090}
-  - component: {fileID: 2043875089}
   m_Layer: 0
   m_Name: BunkerBarrel
   m_TagString: Untagged
@@ -2113,35 +2145,13 @@ Transform:
   m_GameObject: {fileID: 2043875087}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.048562307, y: 0.46876806, z: 0.74664617}
+  m_LocalPosition: {x: -0.004, y: 0.361, z: 0.747}
   m_LocalScale: {x: 0.32780984, y: 0.41504645, z: 0.20234314}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1431698339}
   m_Father: {fileID: 1520374582}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
---- !u!136 &2043875089
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043875087}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &2043875090
 MeshRenderer:
   m_ObjectHideFlags: 0
