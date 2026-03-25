@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using NUnit.Framework;
 public class PlayerTankControl : MonoBehaviour
 {
     public float moveFoce = 10f;
@@ -11,9 +13,11 @@ public class PlayerTankControl : MonoBehaviour
     public float recoilForce = 0f;
 
 
+
     private InputAction moveActions;
     private Rigidbody rb;
 
+    [SerializeField] List<GameObject> wheels;
     [SerializeField] GameObject turret;
     [SerializeField] GameObject muzzle;
     [SerializeField] GameObject bulletPrefab;
@@ -46,11 +50,17 @@ public class PlayerTankControl : MonoBehaviour
     
     public void Move()
     {
+        foreach (GameObject wheel in wheels)
+        {
+            wheel.transform.Rotate(Vector3.right * moveActions.ReadValue<Vector2>().y * moveFoce * Time.fixedDeltaTime);
+        }
+
         Vector2 moveInput = moveActions.ReadValue<Vector2>();
 
         rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
 
         rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Force);
+
 
 
         if (rb.linearVelocity.magnitude > maxSpeed)
