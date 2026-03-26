@@ -3,6 +3,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : HealthPoint
 {
+    public ParticleSystem fireEffect;
     public SphereCollider detectionCollider;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject muzzle;
@@ -40,6 +41,7 @@ public class Enemy : HealthPoint
     }
     void Shoot()
     {
+        fireEffect.Play();
         GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
     }
 

@@ -17,6 +17,7 @@ public class PlayerTankControl : MonoBehaviour
     private InputAction moveActions;
     private Rigidbody rb;
 
+    public ParticleSystem fireEffect;
     [SerializeField] List<GameObject> wheels;
     [SerializeField] GameObject turret;
     [SerializeField] GameObject muzzle;
@@ -59,9 +60,12 @@ public class PlayerTankControl : MonoBehaviour
 
         rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
 
-        rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Force);
+        rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Impulse);
 
-
+        if (rb.angularVelocity.magnitude > rotateSpeed)
+        {
+            rb.angularVelocity = rb.angularVelocity.normalized * rotateSpeed;
+        }
 
         if (rb.linearVelocity.magnitude > maxSpeed)
         {
@@ -98,6 +102,7 @@ public class PlayerTankControl : MonoBehaviour
         rb.AddTorque(-turret.transform.forward * recoilForce, ForceMode.Impulse);
         Debug.Log("Shoot!");
         
+        fireEffect.Play();
     }
 
 
