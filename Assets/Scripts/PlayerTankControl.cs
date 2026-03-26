@@ -7,7 +7,7 @@ public class PlayerTankControl : MonoBehaviour
     public float moveFoce = 10f;
     public float maxSpeed = 100f;
     public float rotateSpeed = 100f;
-   
+    public float maxRotateSpeed = 5f;
     public float fireRate = 5f;
     private float reloadTime = 0f;
     public float recoilForce = 0f;
@@ -59,12 +59,11 @@ public class PlayerTankControl : MonoBehaviour
         Vector2 moveInput = moveActions.ReadValue<Vector2>();
 
         rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
-
         rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Impulse);
 
-        if (rb.angularVelocity.magnitude > rotateSpeed)
+        if (rb.angularVelocity.magnitude > maxRotateSpeed)
         {
-            rb.angularVelocity = rb.angularVelocity.normalized * rotateSpeed;
+            rb.angularVelocity = rb.angularVelocity.normalized * maxRotateSpeed;
         }
 
         if (rb.linearVelocity.magnitude > maxSpeed)
