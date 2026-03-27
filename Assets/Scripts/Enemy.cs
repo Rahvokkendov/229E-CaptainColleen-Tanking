@@ -5,6 +5,8 @@ public class Enemy : HealthPoint
 {
     public ParticleSystem fireEffect;
     public SphereCollider detectionCollider;
+    public AudioSource firingSound;
+    
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] GameObject muzzle;
     public float turnSpeed = 5f;
@@ -41,7 +43,9 @@ public class Enemy : HealthPoint
     }
     void Shoot()
     {
+
         fireEffect.Play();
+        firingSound.Play();
         GameObject bullet = Instantiate(bulletPrefab, muzzle.transform.position, muzzle.transform.rotation);
     }
 

@@ -11,9 +11,7 @@ public class PlayerTankControl : MonoBehaviour
     public float fireRate = 5f;
     private float reloadTime = 0f;
     public float recoilForce = 0f;
-
-
-
+    
     private InputAction moveActions;
     private Rigidbody rb;
 
@@ -28,10 +26,9 @@ public class PlayerTankControl : MonoBehaviour
     private void Awake()
     {
         moveActions = InputSystem.actions.FindAction("Move");
-        //turretActions = InputSystem.actions.FindAction("Turret Turn");
         rb = GetComponent<Rigidbody>();
+        
     }
-
     private void Update()
     {
        TurretTurn();
@@ -41,8 +38,6 @@ public class PlayerTankControl : MonoBehaviour
             Shoot();
             reloadTime = Time.time + fireRate;
         }
-            
-
     }
 
     void FixedUpdate()
@@ -63,17 +58,6 @@ public class PlayerTankControl : MonoBehaviour
 
         rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
         rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Impulse);
-
-        if(Keyboard.current.wKey.isPressed || Keyboard.current.sKey.isPressed)
-        {
-            idleEngine.Stop();
-            movingSound.Play();
-        }
-        else
-        {
-            movingSound.Stop();
-            idleEngine.Play();
-        }
 
         if (rb.angularVelocity.magnitude > maxRotateSpeed)
         {

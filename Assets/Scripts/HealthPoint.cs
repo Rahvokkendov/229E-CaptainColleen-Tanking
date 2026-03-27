@@ -6,6 +6,7 @@ public abstract class HealthPoint : MonoBehaviour
 
     [SerializeField] protected GameObject tank;
     [SerializeField] protected AudioSource hitSound;
+    [SerializeField] protected ParticleSystem destroyFx;
     public void Init(int hp)
     {
         HpPoint = hp;
@@ -17,7 +18,7 @@ public abstract class HealthPoint : MonoBehaviour
         hitSound.Play();
         if (HpPoint <= 0)
         {
-            
+            destroyFx.Play();
             HpPoint = 0;
             gameObject.SetActive(false);
         }
