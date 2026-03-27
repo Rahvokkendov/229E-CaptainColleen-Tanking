@@ -15,7 +15,7 @@ public class Enemy : HealthPoint
     {
         Init(20);
     }
-    // Update is called once per frame
+     //Update is called once per frame
     void Update()
     {
        

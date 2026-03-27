@@ -64,16 +64,16 @@ public class PlayerTankControl : MonoBehaviour
         rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
         rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Impulse);
 
-        //if(Keyboard.current.wKey.isPressed || Keyboard.current.sKey.isPressed)
-        //{
-        //    idleEngine.Stop();
-        //    movingSound.Play();
-        //}
-        //else
-        //{
-        //    movingSound.Stop();
-        //    idleEngine.Play();
-        //}
+        if(Keyboard.current.wKey.isPressed || Keyboard.current.sKey.isPressed)
+        {
+            idleEngine.Stop();
+            movingSound.Play();
+        }
+        else
+        {
+            movingSound.Stop();
+            idleEngine.Play();
+        }
 
         if (rb.angularVelocity.magnitude > maxRotateSpeed)
         {
@@ -114,7 +114,7 @@ public class PlayerTankControl : MonoBehaviour
         rb.AddForce(-turret.transform.forward * recoilForce, ForceMode.Impulse);
         rb.AddTorque(-turret.transform.forward * recoilForce, ForceMode.Impulse);
         Debug.Log("Shoot!");
-        //firingSound.Play();   
+        firingSound.Play();   
         fireEffect.Play();
     }
 
