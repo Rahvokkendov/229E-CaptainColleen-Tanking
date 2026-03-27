@@ -17,7 +17,10 @@ public class PlayerTankControl : MonoBehaviour
     private InputAction moveActions;
     private Rigidbody rb;
 
-    public ParticleSystem fireEffect;
+    [SerializeField] AudioSource firingSound;
+    [SerializeField] AudioSource idleEngine;
+    [SerializeField] AudioSource movingSound;
+    [SerializeField] ParticleSystem fireEffect;
     [SerializeField] List<GameObject> wheels;
     [SerializeField] GameObject turret;
     [SerializeField] GameObject muzzle;
@@ -61,6 +64,17 @@ public class PlayerTankControl : MonoBehaviour
         rb.AddForce(transform.forward * moveInput.y * moveFoce, ForceMode.Force);
         rb.AddTorque(transform.up * moveInput.x * rotateSpeed, ForceMode.Impulse);
 
+        //if(Keyboard.current.wKey.isPressed || Keyboard.current.sKey.isPressed)
+        //{
+        //    idleEngine.Stop();
+        //    movingSound.Play();
+        //}
+        //else
+        //{
+        //    movingSound.Stop();
+        //    idleEngine.Play();
+        //}
+
         if (rb.angularVelocity.magnitude > maxRotateSpeed)
         {
             rb.angularVelocity = rb.angularVelocity.normalized * maxRotateSpeed;
@@ -100,7 +114,7 @@ public class PlayerTankControl : MonoBehaviour
         rb.AddForce(-turret.transform.forward * recoilForce, ForceMode.Impulse);
         rb.AddTorque(-turret.transform.forward * recoilForce, ForceMode.Impulse);
         Debug.Log("Shoot!");
-        
+        //firingSound.Play();   
         fireEffect.Play();
     }
 
